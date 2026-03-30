@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Explore the best city tours across the UK with UK City Tour. Discover London, Edinburgh, and more.">
+  <meta name="keywords" content="UK tours, London tours, Edinburgh tours, city travel">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK City Tour</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
+  <!-- Header and Navigation -->
+  <header>
+    <div class="container">
+      <h1>UK City Tour</h1>
+      <p>Explore the Best City Tours Across the UK</p>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#register">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h2>Discover Amazing UK Tours</h2>
+        <p>Experience history, culture, and unforgettable landmarks with our expert-guided tours.</p>
+        <a href="#register" class="btn">Join Our Tours</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About UK City Tour</h2>
+        <p>
+          UK City Tour is dedicated to providing high-quality, informative, and enjoyable tour experiences.
+          With a dedicated team, a diverse tour catalogue, and a focus on customer satisfaction,
+          we aim to be the preferred choice for city tours in the UK.
+        </p>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <h2>What Our Customers Say</h2>
+
+        <article class="testimonial-card">
+          <h3>Lisa H.</h3>
+          <p>
+            “The London Historical Tour was fantastic! Our guide was knowledgeable and engaging.
+            I learned so much and had a great time.”
+          </p>
+        </article>
+
+        <article class="testimonial-card">
+          <h3>Carlos M.</h3>
+          <p>
+            “I loved the Edinburgh Castle Tour. The history was fascinating,
+            and the views were stunning. Highly recommend!”
+          </p>
+        </article>
+
+        <article class="testimonial-card">
+          <h3>Aisha R.</h3>
+          <p>
+            “The staff at UK City Tour is incredibly helpful.
+            They made sure our tour was smooth and enjoyable.”
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="register" class="register-section">
+      <div class="container">
+        <h2>Register for Updates and Events</h2>
+
+        <!-- Accessible form using labels and required fields -->
+        <form id="registrationForm">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+          <label for="city">Preferred Tour City</label>
+          <select id="city" name="city" required>
+            <option value="">Select a city</option>
+            <option value="London">London</option>
+            <option value="Edinburgh">Edinburgh</option>
+            <option value="Manchester">Manchester</option>
+            <option value="Liverpool">Liverpool</option>
+          </select>
+
+          <button type="submit">Register Now</button>
+        </form>
+
+        <p id="formMessage"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 UK City Tour. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
