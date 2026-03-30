@@ -1,0 +1,4 @@
+document.getElementById('showMessageBtn').addEventListener('click', function() {
+  document.getElementById('thankYouMessage').textContent =
+    'Thank you for choosing UK City Tour. We look forward to helping you explore more amazing destinations across the UK!';
+});
