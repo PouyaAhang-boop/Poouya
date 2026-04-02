@@ -1,33 +1,34 @@
 <!DOCTYPE html>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About UK City Tour</h2>
-      <p class="section-text">
-        UK City Tour is dedicated to providing high-quality, informative, and enjoyable tour experiences. With a dedicated team, a diverse tour catalogue, and a focus on customer satisfaction, we aim to be the preferred choice for city tours in the UK.
-      </p>
+            <p>Experience the culture, football history, and vibrant atmosphere of Manchester.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="testimonials">
     <div class="container">
-      <h2 class="section-title">What Our Customers Say</h2>
-
+      <h2 class="section-title">Customer Reviews</h2>
       <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <h3>Lisa H.</h3>
-          <p>“The London Historical Tour was fantastic! Our guide was knowledgeable and engaging. I learned so much and had a great time.”</p>
+        <div class="card">
+          <div class="card-content">
+            <h3>Lisa H.</h3>
+            <p>“The London Historical Tour was fantastic! Our guide was knowledgeable and engaging.”</p>
+          </div>
         </div>
 
-        <div class="testimonial-card">
-          <h3>Carlos M.</h3>
-          <p>“I loved the Edinburgh Castle Tour. The history was fascinating, and the views were stunning. Highly recommend!”</p>
+        <div class="card">
+          <div class="card-content">
+            <h3>Carlos M.</h3>
+            <p>“I loved the Edinburgh Castle Tour. The history was fascinating and the views were stunning.”</p>
+          </div>
         </div>
 
-        <div class="testimonial-card">
-          <h3>Aisha R.</h3>
-          <p>“The staff at UK City Tour is incredibly helpful. They made sure our tour was smooth and enjoyable.”</p>
+        <div class="card">
+          <div class="card-content">
+            <h3>Aisha R.</h3>
+            <p>“The staff at UK City Tour is incredibly helpful. They made sure our tour was smooth and enjoyable.”</p>
+          </div>
         </div>
       </div>
     </div>
@@ -35,7 +36,8 @@
 
   <section id="register" class="register-section">
     <div class="container">
-      <h2 class="section-title">Register for Updates and Events</h2>
+      <h2 class="section-title">Register for Updates</h2>
+      <p class="section-text">Sign up to receive information about new tours, events, and discounts.</p>
 
       <form id="registrationForm">
         <label for="name">Full Name</label>
@@ -44,16 +46,16 @@
         <label for="email">Email Address</label>
         <input type="email" id="email" required>
 
-        <label for="city">Preferred Tour City</label>
+        <label for="city">Preferred City</label>
         <select id="city" required>
-          <option value="">Select a city</option>
+          <option value="">Choose a city</option>
           <option value="London">London</option>
           <option value="Edinburgh">Edinburgh</option>
           <option value="Manchester">Manchester</option>
           <option value="Liverpool">Liverpool</option>
         </select>
 
-        <button type="submit">Register Now</button>
+        <button type="submit" class="btn">Register</button>
         <p id="formMessage"></p>
       </form>
     </div>
@@ -66,28 +68,31 @@
   </footer>
 
   <script>
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const city = document.getElementById('city').value;
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('registrationForm');
       const formMessage = document.getElementById('formMessage');
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-      if (!emailPattern.test(email)) {
-        formMessage.style.color = 'red';
-        formMessage.textContent = 'Please enter a valid email address.';
-        return;
-      }
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const city = document.getElementById('city').value;
 
-      formMessage.style.color = 'green';
-      formMessage.textContent = `Thank you, ${name}! You have successfully registered for updates about tours in ${city}.`;
+        if (name === '' || email === '' || city === '') {
+          formMessage.style.color = 'yellow';
+          formMessage.textContent = 'Please complete all fields.';
+          return;
+        }
 
-      document.getElementById('registrationForm').reset();
+        formMessage.style.color = '#90ee90';
+        formMessage.textContent = `Thank you ${name}! You are now registered for updates about tours in ${city}.`;
+
+        form.reset();
+      });
     });
   </script>
+
 </body>
 </html>
 
