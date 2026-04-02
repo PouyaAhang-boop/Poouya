@@ -1,132 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Explore the best city tours across the UK with UK City Tour. Discover London, Edinburgh, and more.">
-  <meta name="keywords" content="UK tours, London tours, Edinburgh tours, city travel">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UK City Tour</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  </section>
 
-  <!-- Header and Navigation -->
-  <header>
+  <section id="about">
     <div class="container">
-      <h1>UK City Tour</h1>
-      <p>Explore the Best City Tours Across the UK</p>
-      <nav aria-label="Main Navigation">
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#testimonials">Testimonials</a></li>
-    <li><a href="#register">Register</a></li>
-  </ul>
-</nav>
-        </ul>
-      </nav>
+      <h2 class="section-title">About UK City Tour</h2>
+      <p class="section-text">
+        UK City Tour is dedicated to providing high-quality, informative, and enjoyable tour experiences. With a dedicated team, a diverse tour catalogue, and a focus on customer satisfaction, we aim to be the preferred choice for city tours in the UK.
+      </p>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-  <div class="hero-overlay">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <h2>Explore the Best City Tours Across the UK</h2>
-        <p>
-          Discover iconic landmarks, rich history, and unforgettable experiences with expertly guided tours in London, Edinburgh, Manchester, and more.
-        </p>
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Customers Say</h2>
 
-        <div class="hero-buttons">
-          <a href="#register" class="btn primary-btn">Book a Tour</a>
-          <a href="#testimonials" class="btn secondary-btn">Read Reviews</a>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <h3>Lisa H.</h3>
+          <p>“The London Historical Tour was fantastic! Our guide was knowledgeable and engaging. I learned so much and had a great time.”</p>
+        </div>
+
+        <div class="testimonial-card">
+          <h3>Carlos M.</h3>
+          <p>“I loved the Edinburgh Castle Tour. The history was fascinating, and the views were stunning. Highly recommend!”</p>
+        </div>
+
+        <div class="testimonial-card">
+          <h3>Aisha R.</h3>
+          <p>“The staff at UK City Tour is incredibly helpful. They made sure our tour was smooth and enjoyable.”</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <h2>About UK City Tour</h2>
-        <p>
-          UK City Tour is dedicated to providing high-quality, informative, and enjoyable tour experiences.
-          With a dedicated team, a diverse tour catalogue, and a focus on customer satisfaction,
-          we aim to be the preferred choice for city tours in the UK.
-        </p>
-      </div>
-    </section>
+  </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-      <div class="container">
-        <h2>What Our Customers Say</h2>
+  <section id="register" class="register-section">
+    <div class="container">
+      <h2 class="section-title">Register for Updates and Events</h2>
 
-        <article class="testimonial-card">
-          <h3>Lisa H.</h3>
-          <p>
-            “The London Historical Tour was fantastic! Our guide was knowledgeable and engaging.
-            I learned so much and had a great time.”
-          </p>
-        </article>
+      <form id="registrationForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required>
 
-        <article class="testimonial-card">
-          <h3>Carlos M.</h3>
-          <p>
-            “I loved the Edinburgh Castle Tour. The history was fascinating,
-            and the views were stunning. Highly recommend!”
-          </p>
-        </article>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required>
 
-        <article class="testimonial-card">
-          <h3>Aisha R.</h3>
-          <p>
-            “The staff at UK City Tour is incredibly helpful.
-            They made sure our tour was smooth and enjoyable.”
-          </p>
-        </article>
-      </div>
-    </section>
+        <label for="city">Preferred Tour City</label>
+        <select id="city" required>
+          <option value="">Select a city</option>
+          <option value="London">London</option>
+          <option value="Edinburgh">Edinburgh</option>
+          <option value="Manchester">Manchester</option>
+          <option value="Liverpool">Liverpool</option>
+        </select>
 
-    <!-- Registration Form -->
-    <section id="register" class="register-section">
-      <div class="container">
-        <h2>Register for Updates and Events</h2>
-
-        <!-- Accessible form using labels and required fields -->
-        <form id="registrationForm">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-          <label for="city">Preferred Tour City</label>
-          <select id="city" name="city" required>
-            <option value="">Select a city</option>
-            <option value="London">London</option>
-            <option value="Edinburgh">Edinburgh</option>
-            <option value="Manchester">Manchester</option>
-            <option value="Liverpool">Liverpool</option>
-          </select>
-
-          <button type="submit">Register Now</button>
-        </form>
-
+        <button type="submit">Register Now</button>
         <p id="formMessage"></p>
-      </div>
-    </section>
-  </main>
+      </form>
+    </div>
+  </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <p>&copy; 2026 UK City Tour. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const city = document.getElementById('city').value;
+      const formMessage = document.getElementById('formMessage');
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      formMessage.style.color = 'green';
+      formMessage.textContent = `Thank you, ${name}! You have successfully registered for updates about tours in ${city}.`;
+
+      document.getElementById('registrationForm').reset();
+    });
+  </script>
 </body>
 </html>
+
