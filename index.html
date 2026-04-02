@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>UK City Tour | Explore Britain's Finest</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header & navigation */
+    .site-header {
+      background: #0a2b3e;
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo h1 {
+      font-size: 1.7rem;
+      letter-spacing: -0.3px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffe6b0, #ffbc6e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .logo p {
+      font-size: 0.8rem;
+      color: #cbd5e6;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #eef2ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      font-size: 1rem;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      border-bottom-color: #f5b042;
+      color: #ffdd99;
+    }
+
+    /* page sections - each page is a separate div that toggles */
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .active-page {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* hero / banners */
+    .hero {
+      background: linear-gradient(105deg, #0f2f3f 0%, #1c4e6c 100%);
+      color: white;
+      padding: 3.5rem 0;
+      border-radius: 2rem;
+      margin: 2rem 0 2rem 0;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .tour-card, .review-card, .gallery-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      transition: all 0.2s;
+      border: 1px solid #e4e7ec;
+    }
+    .tour-card:hover, .gallery-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+    }
+
+    .card-img {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+    }
+    .card-content {
+      padding: 1.5rem;
+    }
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #f5b042;
+      color: #1e293b;
+      font-weight: 600;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .btn:hover {
+      background: #e09d2c;
+      transform: scale(0.97);
+    }
+
+    /* reviews section */
+    .review-card {
+      padding: 1rem;
+    }
+    .review-card p {
+      font-style: italic;
+      margin: 0.8rem 0;
+    }
+    .review-card h4 {
+      color: #f5b042;
+    }
+
+    /* form styling */
+    .form-panel {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      background: #fefefe;
+    }
+    .register-btn {
+      background: #0a2b3e;
+      color: white;
+      width: auto;
+      padding: 0.8rem 2rem;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e6;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    /* gallery images */
+    .gallery-card .card-img {
+      height: 220px;
+    }
+
+    .about-text {
+      background: white;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      margin: 2rem 0;
+      line-height: 1.7;
+    }
+
+    .contact-info {
+      background: #eef2ff;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+    }
+
+    @media (max-width: 700px) {
+      .header-flex {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-flex">
+    <div class="logo">
+      <h1>🇬🇧 UK City Tour</h1>
+      <p>History • Culture • Vibrant Spirit</p>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" data-page="home" class="nav-link active">Home</a></li>
+      <li><a href="#" data-page="tours" class="nav-link">Tours</a></li>
+      <li><a href="#" data-page="gallery" class="nav-link">Gallery</a></li>
+      <li><a href="#" data-page="about" class="nav-link">About</a></li>
+      <li><a href="#" data-page="contact" class="nav-link">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="container">
+  <!-- HOME PAGE -->
+  <div id="home-page" class="page active-page">
+    <div class="hero">
+      <h2>Experience the culture, football history, and vibrant atmosphere of Manchester.</h2>
+      <p>Iconic landmarks · Premier League energy · Music legacy · Northern soul</p>
+    </div>
+
+    <!-- Customer Reviews section from your content -->
+    <div style="margin: 2rem 0 1rem 0;">
+      <h2 style="font-size: 1.8rem;">⭐ Customer Reviews</h2>
+      <p style="color: #4b5563;">Real stories from our explorers</p>
+    </div>
+    <div class="card-grid">
+      <div class="review-card">
+        <h4>Lisa H.</h4>
+        <p>“The London Historical Tour was fantastic! Our guide was knowledgeable and engaging.”</p>
+        <div>★★★★★</div>
+      </div>
+      <div class="review-card">
+        <h4>Carlos M.</h4>
+        <p>“I loved the Edinburgh Castle Tour. The history was fascinating and the views were stunning.”</p>
+        <div>★★★★★</div>
+      </div>
+      <div class="review-card">
+        <h4>Aisha R.</h4>
+        <p>“The staff at UK City Tour is incredibly helpful. They made sure our tour was smooth and enjoyable.”</p>
+        <div>★★★★★</div>
+      </div>
+    </div>
+
+    <!-- Register for updates (exactly as original) -->
+    <div class="form-panel" id="registerBlock">
+      <h2 style="margin-bottom: 0.5rem;">📧 Register for Updates</h2>
+      <p style="margin-bottom: 1.5rem;">Sign up to receive information about new tours, events, and discounts.</p>
+      <form id="updateForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="e.g. Emma Watson" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="emailAddr" placeholder="hello@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred City</label>
+          <select id="prefCity">
+            <option value="">Choose a city</option>
+            <option>London</option>
+            <option>Manchester</option>
+            <option>Edinburgh</option>
+            <option>Liverpool</option>
+            <option>Bath</option>
+          </select>
+        </div>
+        <button type="submit" class="btn register-btn">Register →</button>
+      </form>
+      <div id="formFeedback" style="margin-top: 1rem; font-weight: 500;"></div>
+    </div>
+  </div>
+
+  <!-- TOURS PAGE -->
+  <div id="tours-page" class="page">
+    <div class="hero" style="background: linear-gradient(105deg, #2c3e4e, #1b4f6e);">
+      <h2>🎟️ Our Signature Tours</h2>
+      <p>Explore Britain’s finest cities with expert guides</p>
+    </div>
+    <div class="card-grid">
+      <div class="tour-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/2c6e9e/white?text=London+History');"></div>
+        <div class="card-content">
+          <h3>London Historical Tour</h3>
+          <p>Westminster Abbey, Tower Bridge & hidden gems. Dive into 2000 years of history.</p>
+          <span style="font-weight: bold;">£49 / person</span>
+          <a href="#" class="btn book-btn" data-tour="London Historical Tour">Book now</a>
+        </div>
+      </div>
+      <div class="tour-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/4a6a3b/white?text=Edinburgh+Castle');"></div>
+        <div class="card-content">
+          <h3>Edinburgh Castle Tour</h3>
+          <p>Royal splendour, crown jewels, and panoramic views. Includes skip-the-line.</p>
+          <span style="font-weight: bold;">£55 / person</span>
+          <a href="#" class="btn book-btn" data-tour="Edinburgh Castle Tour">Book now</a>
+        </div>
+      </div>
+      <div class="tour-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/b54c3c/white?text=Manchester+Football');"></div>
+        <div class="card-content">
+          <h3>Manchester Football Heritage</h3>
+          <p>Old Trafford, Etihad & National Football Museum. For true fans!</p>
+          <span style="font-weight: bold;">£42 / person</span>
+          <a href="#" class="btn book-btn" data-tour="Manchester Football Heritage">Book now</a>
+        </div>
+      </div>
+      <div class="tour-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/8f5e3c/white?text=Bath+Spa');"></div>
+        <div class="card-content">
+          <h3>Bath & Roman Spa</h3>
+          <p>Roman baths, Georgian architecture & cream tea experience.</p>
+          <span style="font-weight: bold;">£65 / person</span>
+          <a href="#" class="btn book-btn" data-tour="Bath & Roman Spa">Book now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY PAGE -->
+  <div id="gallery-page" class="page">
+    <div class="hero" style="background: linear-gradient(105deg, #1e3c3f, #2c5e6b);">
+      <h2>📸 Moments that Inspire</h2>
+      <p>Vibrant streets, historic landmarks & British charm</p>
+    </div>
+    <div class="card-grid">
+      <div class="gallery-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/408e7c/white?text=Manchester+Street+Art');"></div>
+        <div class="card-content"><h3>Northern Quarter, Manchester</h3><p>Colourful murals & music scene.</p></div>
+      </div>
+      <div class="gallery-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/6a4c9c/white?text=Big+Ben+London');"></div>
+        <div class="card-content"><h3>London at Dusk</h3><p>Iconic skyline views along the Thames.</p></div>
+      </div>
+      <div class="gallery-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/2a6f5f/white?text=Edinburgh+Old+Town');"></div>
+        <div class="card-content"><h3>Edinburgh Royal Mile</h3><p>Historic closes & castle views.</p></div>
+      </div>
+      <div class="gallery-card">
+        <div class="card-img" style="background-image: url('https://placehold.co/600x400/c36a2d/white?text=Liverpool+Waterfront');"></div>
+        <div class="card-content"><h3>Liverpool Waterfront</h3><p>UNESCO heritage & Beatles legacy.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE (history & staff story) -->
+  <div id="about-page" class="page">
+    <div class="hero" style="background: #1e2f3a;">
+      <h2>📖 Our Story</h2>
+      <p>Authentic British experiences since 2012</p>
+    </div>
+    <div class="about-text">
+      <h3>🇬🇧 Born from passion for British heritage</h3>
+      <p>UK City Tour was founded by a group of historians and local guides who wanted to share the real soul of British cities — beyond postcards. We believe travel should be immersive: from the buzzing football terraces of Manchester to the ancient cobbles of Edinburgh. Every tour is led by storytellers who bring history to life.</p>
+      <p>⭐ Awarded "Best Cultural Tour Operator 2024" by UK Travel Awards. We’re proud to offer small-group experiences, sustainable practices, and true insider access. Whether you're a history buff, a foodie, or a music lover, we craft journeys that stay with you.</p>
+      <p>📍 Offices in London, Manchester & Edinburgh. Over 50k happy customers.</p>
+    </div>
+    <div class="card-grid" style="margin-top: 0;">
+      <div class="review-card">
+        <h4>✨ Mission</h4>
+        <p>Make every traveler feel the heartbeat of the UK — inclusive, fun, and deeply memorable.</p>
+      </div>
+      <div class="review-card">
+        <h4>🌱 Sustainability</h4>
+        <p>We support local communities and carbon-neutral operations. One tree planted per booking.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact-page" class="page">
+    <div class="hero" style="background: #2c3f4a;">
+      <h2>📞 Get in Touch</h2>
+      <p>We’d love to hear from you — questions, custom group tours, or just a hello.</p>
+    </div>
+    <div class="contact-info" style="margin: 2rem 0;">
+      <p><strong>📍 Central Office:</strong> 48 Portland Street, Manchester M1 4QB, United Kingdom</p>
+      <p><strong>📧 Email:</strong> hello@ukcitytour.com</p>
+      <p><strong>📞 Phone:</strong> +44 161 234 5678</p>
+      <p><strong>⏱️ Support Hours:</strong> Mon–Fri 9am–6pm (GMT)</p>
+    </div>
+    <div class="form-panel">
+      <h3>Send us a message</h3>
+      <form id="contactForm">
+        <div class="form-group"><label>Name</label><input type="text" id="contactName" required placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="contactEmail" required placeholder="email@example.com"></div>
+        <div class="form-group"><label>Message</label><textarea rows="4" id="contactMsg" style="width:100%; border-radius:1rem; border:1px solid #cbd5e1; padding:0.8rem;" placeholder="Tell us about your dream tour..."></textarea></div>
+        <button type="submit" class="btn register-btn" style="background:#f5b042; color:#1f2937;">Send Message</button>
+        <p id="contactFeedback" style="margin-top: 1rem;"></p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2026 UK City Tour. All Rights Reserved. | Experience the culture, football history, and vibrant atmosphere of Manchester & beyond.</p>
+    <p style="margin-top: 0.8rem; font-size: 0.85rem;">📍 Award-winning tours • 5-star rated • Book with confidence</p>
+  </div>
+</footer>
+
+<script>
+  // ----- PAGE ROUTING (multi-page SPA) -----
+  const pages = {
+    home: 'home-page',
+    tours: 'tours-page',
+    gallery: 'gallery-page',
+    about: 'about-page',
+    contact: 'contact-page'
+  };
+
+  function showPage(pageId) {
+    // deactivate all pages
+    Object.values(pages).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('active-page');
+    });
+    const activePage = document.getElementById(pageId);
+    if (activePage) activePage.classList.add('active-page');
+
+    // update nav active styles
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-page') === pageId.replace('-page', '')) {
+        link.classList.add('active');
+      }
+    });
+    // scroll to top gently
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // attach click handlers to nav
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const pageKey = link.getAttribute('data-page');
+      if (pages[pageKey]) {
+        showPage(pages[pageKey]);
+      } else {
+        showPage('home-page');
+      }
+    });
+  });
+
+  // ---- REGISTRATION FORM (home page) with localStorage thank you simulation & validation
+  const updateForm = document.getElementById('updateForm');
+  const feedbackDiv = document.getElementById('formFeedback');
+  if (updateForm) {
+    updateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fullName = document.getElementById('fullName')?.value.trim();
+      const email = document.getElementById('emailAddr')?.value.trim();
+      const citySelect = document.getElementById('prefCity');
+      const city = citySelect?.value;
+      if (!fullName || !email) {
+        feedbackDiv.innerHTML = '❌ Please enter both name and email address.';
+        feedbackDiv.style.color = '#b91c1c';
+        return;
+      }
+      if (!email.includes('@') || !email.includes('.')) {
+        feedbackDiv.innerHTML = '❌ Please enter a valid email address.';
+        return;
+      }
+      if (!city || city === 'Choose a city') {
+        feedbackDiv.innerHTML = '❌ Please select a preferred city.';
+        return;
+      }
+      // store registration data (simple)
+      localStorage.setItem('ukTour_registered', JSON.stringify({ name: fullName, email, city, date: new Date().toISOString() }));
+      feedbackDiv.innerHTML = `✅ Thanks ${fullName}! You're registered for updates about ${city}. Check your inbox soon.`;
+      feedbackDiv.style.color = '#15803d';
+      updateForm.reset();
+      // optional: extra bonus - show a little thank you toast effect
+      setTimeout(() => {
+        feedbackDiv.innerHTML = '';
+      }, 4000);
+    });
+  }
+
+  // ---- BOOK NOW buttons (tours page) show an alert and store interest
+  document.addEventListener('click', (e) => {
+    if (e.target.classList && e.target.classList.contains('book-btn')) {
+      e.preventDefault();
+      const tourName = e.target.getAttribute('data-tour') || 'this amazing tour';
+      alert(`✨ Thank you for your interest in "${tourName}"!\n\nPlease visit our Contact page or call us to finalize your booking. We'll be happy to assist.`);
+    }
+  });
+
+  // ---- CONTACT FORM handling (smooth)
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName')?.value.trim();
+      const email = document.getElementById('contactEmail')?.value.trim();
+      const msg = document.getElementById('contactMsg')?.value.trim();
+      const feedback = document.getElementById('contactFeedback');
+      if (!name || !email || !msg) {
+        feedback.innerHTML = '❌ Please fill all fields before sending.';
+        feedback.style.color = '#b91c1c';
+        return;
+      }
+      if (!email.includes('@')) {
+        feedback.innerHTML = '❌ Valid email required.';
+        return;
+      }
+      feedback.innerHTML = `📨 Thanks ${name}! Your message has been sent. We’ll reply within 24h.`;
+      feedback.style.color = '#0f3b2c';
+      contactForm.reset();
+      setTimeout(() => { feedback.innerHTML = ''; }, 5000);
+    });
+  }
+
+  // ---- HOMEPAGE: if there is any extra dynamic, ensure that the "Register for updates" section also shows a nice touch
+  // also make sure that the existing reviews & culture appear as requested
+
+  // ---- optional: detect if someone tries to access via hash (for future)
+  function handleHash() {
+    const hash = window.location.hash.slice(1);
+    if (hash && pages[hash]) {
+      showPage(pages[hash]);
+    } else {
+      showPage('home-page');
+    }
+  }
+  window.addEventListener('hashchange', handleHash);
+  if (window.location.hash) handleHash();
+  else showPage('home-page');
+
+  // Bonus: dynamic year in footer
+  const yearSpan = document.querySelector('footer .container p:first-child');
+  if (yearSpan) {
+    yearSpan.innerHTML = yearSpan.innerHTML.replace('2026', new Date().getFullYear());
+  }
+
+  // add a little style to make placeholder images more appealing? but we keep the vibrant background images.
+  // Also ensure that the Manchester culture & football heritage is front and center on home hero
+  // Good: hero already shows Manchester culture message. 
+  console.log("UK City Tour multi-page ready — rich experience, reviews, registration, tours!");
+</script>
+</body>
+</html>
