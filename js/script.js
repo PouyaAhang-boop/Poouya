@@ -1,32 +1,37 @@
-// Registration form validation and data collection
+document.addEventListener('DOMContentLoaded', function () {
 
-document.getElementById('registrationForm').addEventListener('submit', function(event) {
-  event.preventDefault();
+  const showButton = document.getElementById('showMessageBtn');
+  const thankYouMessage = document.getElementById('thankYouMessage');
 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const city = document.getElementById('city').value;
+  if (showButton) {
+    showButton.addEventListener('click', function () {
+      thankYouMessage.textContent = 'Thank you for choosing UK City Tour!';
+    });
+  }
+
+  const form = document.getElementById('registrationForm');
   const formMessage = document.getElementById('formMessage');
 
-  // Email validation pattern
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-  if (name === '' || email === '' || city === '') {
-    formMessage.style.color = 'red';
-    formMessage.textContent = 'Please fill in all fields.';
-    return;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const city = document.getElementById('city').value;
+
+      if (name === '' || email === '' || city === '') {
+        formMessage.textContent = 'Please fill in all fields.';
+        formMessage.style.color = 'red';
+        return;
+      }
+
+      formMessage.textContent =
+        'Thank you, ' + name + '! You have successfully registered for updates about tours in ' + city + '.';
+      formMessage.style.color = 'green';
+
+      form.reset();
+    });
   }
 
-  if (!emailPattern.test(email)) {
-    formMessage.style.color = 'red';
-    formMessage.textContent = 'Please enter a valid email address.';
-    return;
-  }
-
-  formMessage.style.color = 'green';
-  formMessage.textContent =
-    `Thank you, ${name}! You have successfully registered for updates about tours in ${city}.`;
-
-  // Reset form after successful submission
-  document.getElementById('registrationForm').reset();
 });
